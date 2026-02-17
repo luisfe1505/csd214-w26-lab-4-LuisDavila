@@ -1,0 +1,82 @@
+# .files2ignore GenericPromptGeneratorV3
+.git
+volumes/
+
+# Generator Output & Custom Data
+ai_prompt*
+Timeline*.json
+assets/
+
+### Node / NPM / Express / React ###
+node_modules/
+package-lock.json
+dist/
+build/
+out/
+coverage/
+.nyc_output/
+
+# Environment Variables (Security: Never upload secrets)
+.env
+.env.local
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Framework specific
+.next/
+.nuxt/
+dist-ssr
+*.local
+
+### Spring Boot / Java ###
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### IDEs / Editors ###
+
+# IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
+
+# VS Code
+.vscode/
+!.vscode/extensions.json
+
+# STS / Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# OS / Misc
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

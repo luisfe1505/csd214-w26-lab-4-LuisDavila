@@ -1,0 +1,149 @@
+classDiagram
+    %% Interfaces and Abstracts
+    class SaleableItem {
+        <<interface>>
+        +sellItem()
+        +getPrice() double
+    }
+    
+    class Serializable {
+        <<interface>>
+    }
+
+    class Editable {
+        <<abstract>>
+        +initialize(Scanner)
+        +edit(Scanner)
+        +getInput(Scanner, String) String
+        +getInput(Scanner, int) int
+        +getInput(Scanner, double) double
+        +getInput(Scanner, boolean) boolean
+        +getInput(Scanner, Date) Date
+    }
+
+    class Product {
+        <<abstract>>
+        -String productId
+        -String name
+        -double price
+        +Product()
+        +Product(String, String, double)
+    }
+
+    %% Base Categories
+    class Publication {
+        <<abstract>>
+        -String title
+        -int copies
+        +Publication(String, double, int)
+    }
+
+    class Vehicle {
+        -String make
+        -String model
+        -int year
+        -int mileage
+        +Vehicle(String, String, double, String, String, int, int)
+    }
+
+    class Stationery {
+        <<abstract>>
+        -String brand
+        +Stationery(String, double)
+    }
+
+    %% Concrete Classes
+    class Ticket {
+        -String description
+        +Ticket(String, double)
+    }
+
+    class Widget {
+        -String widgetName
+        -double price
+        +Widget(String, double)
+    }
+
+    class Book {
+        -String author
+        +Book(String, String, double, int)
+    }
+
+    class Magazine {
+        -int orderQty
+        -Date currentIssue
+        +Magazine(int, Date, String, double, int)
+    }
+
+    class DiscMag {
+        -boolean hasDisc
+        +DiscMag(boolean, int, Date, String, double, int)
+    }
+
+    class Pen {
+        -String color
+        +Pen(String, double, String)
+    }
+
+    class Notebook {
+        -int pageCount
+        +Notebook(String, double, int)
+    }
+
+    class Car {
+        -int numDoors
+        -String fuelType
+        +Car(..., int, String)
+    }
+
+    class Truck {
+        -double towingCapacity
+        +Truck(..., double)
+    }
+
+    %% Application Logic
+    class CashTill {
+        -double runningTotal
+        +sellItem(SaleableItem)
+        +showTotal()
+    }
+
+    class App {
+        -List~SaleableItem~ items
+        -CashTill cashTill
+        -Scanner input
+        +run()
+        +populate()
+        +addItem()
+        +editItem()
+        +sellItem()
+    }
+
+    class Main {
+        +main(String[])
+    }
+
+    %% Relationships
+    SaleableItem <|.. Editable
+    Serializable <|.. Editable
+    Editable <|-- Product
+    
+    Product <|-- Publication
+    Product <|-- Vehicle
+    Product <|-- Stationery
+    Product <|-- Ticket
+    Product <|-- Widget
+
+    Publication <|-- Book
+    Publication <|-- Magazine
+    Magazine <|-- DiscMag
+
+    Stationery <|-- Pen
+    Stationery <|-- Notebook
+
+    Vehicle <|-- Car
+    Vehicle <|-- Truck
+
+    App o-- SaleableItem : manages
+    App --> CashTill : uses
+    Main --> App : creates
