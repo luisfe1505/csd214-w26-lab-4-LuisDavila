@@ -85,6 +85,7 @@ public class App {
         System.out.println("4. Ticket");
         System.out.println("5. Pen");
         System.out.println("6. Notebook");
+        System.out.println("7. Iphone");
         System.out.println("99. Back");
 
         int choice = getIntInput();
@@ -158,6 +159,19 @@ public class App {
                     nEnt.setName(nPojo.getPageCount() + "pg " + nPojo.getBrand() + " Notebook");
                     em.persist(nEnt);
                     break;
+                case 7:
+                    Iphone iPojo = new Iphone();
+                    iPojo.initialize(input); // Use POJO for input
+                    // Map to Entity
+                    IphoneEntity iEnt = new IphoneEntity(
+                            iPojo.getName(),
+                            iPojo.getPrice(),
+                            iPojo.getColor(),
+                            iPojo.getStorage(),
+                            iPojo.isHasMagSafe()
+                    );
+                    em.persist(iEnt);
+                    break;
                 default:
                     System.out.println("Invalid type.");
             }
@@ -221,9 +235,21 @@ public class App {
                 PenEntity pe = (PenEntity) entity;
                 Pen pojo = new Pen(pe.getBrand(), pe.getPrice(), pe.getColor());
                 pojo.edit(input);
+                // Map Back
                 pe.setBrand(pojo.getBrand());
                 pe.setPrice(pojo.getPrice());
                 pe.setColor(pojo.getColor());
+            }
+            else if (entity instanceof IphoneEntity) {
+                IphoneEntity ie = (IphoneEntity) entity;
+                Iphone pojo = new Iphone(ie.getProductId(), ie.getName(), ie.getPrice(), ie.getColor(), ie.getStorage(), ie.isHasMagSafe());
+                pojo.edit(input); // User interaction
+                // Map Back
+                ie.setName(pojo.getName());
+                ie.setPrice(pojo.getPrice());
+                ie.setColor(pojo.getColor());
+                ie.setStorage(pojo.getStorage());
+                ie.setHasMagSafe(pojo.isHasMagSafe());
             }
             // ... (Other types would follow similar pattern) ...
             else {
